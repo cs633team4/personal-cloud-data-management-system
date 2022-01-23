@@ -1,4 +1,4 @@
-# PersonalCloudDataManagementSystem
+# Personal Cloud Data Management System
 
 Personal Cloud Data Management System is a web application to achieve the following user-facing functionalities: 
 
