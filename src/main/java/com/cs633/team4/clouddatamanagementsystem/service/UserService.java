@@ -23,16 +23,25 @@ public class UserService {
     }
 
     public Integer createUser(User user) {
+        user.count += 1;
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
         String encodedSalt = Base64.getEncoder().encodeToString(salt);
         String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
-        return userMapper.insert(new User(null, user.getUsername(), encodedSalt, hashedPassword,
+        return userMapper.insert(new User(user.count, user.getUsername(), encodedSalt, hashedPassword,
                                  user.getFirstName(), user.getLastName()));
     }
 
-    public User getUser(String username) {
-        return userMapper.getUser(username);
+    public void update(User user) {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        String encodedSalt = Base64.getEncoder().encodeToString(salt);
+        String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
+        System.out.println(user.getPassword());
+        User tempUser = userMapper.getUser(user.getUsername());
+        userMapper.delete(tempUser.getUserId());
+        userMapper.insert(new User(tempUser.getUserId(), tempUser.getUsername(), encodedSalt, hashedPassword, tempUser.getFirstName(), tempUser.getLastName()));
     }
 }

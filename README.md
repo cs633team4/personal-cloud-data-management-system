@@ -13,16 +13,12 @@
 - Password Management - Save, edit, and delete passwords
 
 
-## Dev Process
+## Dev History
 
-Week 1
-1. Create the repository.
-2. Add the contributors.
-
-Week 2
-1. Initialize the project through Spring Initializer with the necessary dependencies.
+01/22/2022
+1. Initialize the project through Spring Initializr with the necessary dependencies.
 2. Create an MVC structure for the project.
-3. Implement the Signup, Login, and Logout functionalities.
+3. Implement the Signup, Login, Logout functionalities.
 4. Enable Login Authentication: authorize user logins by matching their credentials against those stored in the database.
 5. Enable Security Configuration: restrict unauthorized users from accessing pages other than the login and signup pages.
 6. Progress:
