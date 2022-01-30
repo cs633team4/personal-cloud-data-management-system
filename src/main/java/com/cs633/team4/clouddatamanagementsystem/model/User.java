@@ -10,6 +10,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    public static int count = 0;
 
     public User(Integer userId, String username, String salt, String password, String firstName, String lastName) {
         this.userId = userId;
