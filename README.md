@@ -29,3 +29,14 @@ Week 2
 - Backend：packages of model, service, controller, and config  
 - Frontend：html templates of signup page, login page, result page 
 - Database：schema.sql, package of mapper
+
+Week 3
+1. Implement functionality: File Storage - Upload, download, and delete files (different file extensions to support)
+2. Implement functionality: Note Management - Create, update, and delete text notes
+3. Implement functionality: Password Management - Save, edit, and delete passwords
+4.
+5.
+6. Progress:
+- Backend：packages of model, service, controller, and config  
+- Frontend：html templates of signup page, login page, result page, home page, error page 
+- Database：schema.sql, package of mapper
