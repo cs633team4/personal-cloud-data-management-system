@@ -44,4 +44,8 @@ public class UserService {
         userMapper.delete(tempUser.getUserId());
         userMapper.insert(new User(tempUser.getUserId(), tempUser.getUsername(), encodedSalt, hashedPassword, tempUser.getFirstName(), tempUser.getLastName()));
     }
+
+    public User getUser(String username) {
+        return userMapper.getUser(username);
+    }
 }
