@@ -20,12 +20,12 @@ Week 1
 2. Add the contributors.
 
 Week 2
-3. Initialize the project through Spring Initializr with the necessary dependencies.
-4. Create an MVC structure for the project.
-5. Implement the Signup, Login, Logout functionalities.
-6. Enable Login Authentication: authorize user logins by matching their credentials against those stored in the database.
-7. Enable Security Configuration: restrict unauthorized users from accessing pages other than the login and signup pages.
-8. Progress:
+1. Initialize the project through Spring Initializr with the necessary dependencies.
+2. Create an MVC structure for the project.
+3. Implement the Signup, Login, Logout functionalities.
+4. Enable Login Authentication: authorize user logins by matching their credentials against those stored in the database.
+5. Enable Security Configuration: restrict unauthorized users from accessing pages other than the login and signup pages.
+6. Progress:
 - Backend：packages of model, service, controller, and config  
 - Frontend：html templates of signup page, login page, result page 
 - Database：schema.sql, package of mapper
