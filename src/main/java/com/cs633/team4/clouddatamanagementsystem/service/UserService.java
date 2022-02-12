@@ -41,8 +41,9 @@ public class UserService {
         String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
         System.out.println(user.getPassword());
         User tempUser = userMapper.getUser(user.getUsername());
-        userMapper.delete(tempUser.getUserId());
-        userMapper.insert(new User(tempUser.getUserId(), tempUser.getUsername(), encodedSalt, hashedPassword, tempUser.getFirstName(), tempUser.getLastName()));
+       // userMapper.delete(tempUser.getUserId());
+        userMapper.updatePassword(hashedPassword,tempUser.getUsername(),encodedSalt);
+       // userMapper.update(new User(tempUser.getUserId(), tempUser.getUsername(), encodedSalt, hashedPassword, tempUser.getFirstName(), tempUser.getLastName()));
     }
 
     public User getUser(String username) {

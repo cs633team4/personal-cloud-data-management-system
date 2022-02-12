@@ -22,4 +22,7 @@ public interface UserMapper {
 
     @Delete("DELETE FROM USERS WHERE userid = #{userId}")
     void delete(Integer userId);
+
+    @Update("UPDATE USERS SET  password = #{password},salt = #{salt} WHERE username = #{username}")
+    void updatePassword(String password, String username,String salt);
 }

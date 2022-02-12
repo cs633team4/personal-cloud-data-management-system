@@ -99,6 +99,7 @@ public class FileController {
         // Use it to fully configure the HTTP response.
 
         File file = fileService.getFile(fileId);
+
         // set custom contentType, header, and body
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(file.getContentType()))

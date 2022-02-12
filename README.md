@@ -39,3 +39,8 @@ Week 3
 - Backend：packages of model, service, controller and config  
 - Frontend：html templates of signup page, login page, result page, home page, and error page, css, js 
 - Database：schema.sql, package of mapper
+
+Week 4
+1. Updates to Design & Layout of PCDMS - User-friendly fonts and colors, updates to home screen card, updates to forget password card, and updates to register new user card.
+3. Progress:
+- Frontend: bootstrap - CSS templates, login page updates (login.html), button and icon updates, and registration card updates. 
