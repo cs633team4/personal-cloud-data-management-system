@@ -34,6 +34,7 @@ public class ForgotController {
             model.addAttribute("signupErrorMessage", "The username already exists. Please try another one.");
 
         } else {
+            System.out.println(user.toString());
             userService.update(user);
             model.addAttribute("updateSuccess", true);
         }
