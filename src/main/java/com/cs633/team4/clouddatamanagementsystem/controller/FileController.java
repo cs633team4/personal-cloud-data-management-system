@@ -31,7 +31,7 @@ public class FileController {
     }
 
     @PostMapping("/upload")
-    public String uploadFile (@RequestParam("fileUpload") MultipartFile file, Authentication auth, Model model)
+    public String uploadImage (@RequestParam("fileUpload") MultipartFile file, Authentication auth, Model model)
             throws IOException {
 
         try {
@@ -62,7 +62,7 @@ public class FileController {
                     Long.toString(file.getSize()), file.getBytes(), user.getUserId());
 
             // upload file
-            fileService.addFile(newFile);
+            fileService.addImage(newFile);
             model.addAttribute("success", true);
             model.addAttribute("message", "Upload file successfully!");
 
@@ -98,14 +98,14 @@ public class FileController {
         // ResponseEntity represents the whole HTTP response: status code, headers, and body.
         // Use it to fully configure the HTTP response.
 
-        File file = fileService.getFile(fileId);
+        File file = fileService.getImage(fileId);
 
         // set custom contentType, header, and body
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(file.getContentType()))
                 // replace "attachment" with "inline" if view file in new browser tab instead of download file directly
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFileName()+"\"")
-                .body(file.getFileData());
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getImageName()+"\"")
+                .body(file.getImageData());
     }
 
 }

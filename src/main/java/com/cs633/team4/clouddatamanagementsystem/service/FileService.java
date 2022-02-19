@@ -16,7 +16,7 @@ public class FileService {
         this.fileMapper = fileMapper;
     }
 
-    public Integer addFile(File file) { return fileMapper.insert(file);}
+    public Integer addImage(File file) { return fileMapper.insert(file);}
 
     public Integer updateFile(File file) {
         return fileMapper.update(file);
@@ -26,8 +26,8 @@ public class FileService {
         return fileMapper.delete(fileId);
     }
 
-    public File getFile(Integer fileId) {
-        return fileMapper.getFile(fileId);
+    public File getImage(Integer fileId) {
+        return fileMapper.getImage(fileId);
     }
 
     public List<File> getAllFiles(User user) {
@@ -35,6 +35,6 @@ public class FileService {
     }
 
     public boolean isFileNameAvailable(String fileName) {
-        return fileMapper.getFileByName(fileName) == null;
+        return fileMapper.getImageByName(fileName) == null;
     }
 }
