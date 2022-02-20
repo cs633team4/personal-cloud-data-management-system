@@ -19,8 +19,10 @@
     <div id="contentDiv" style="clear: right;">
         <nav style="clear: right;">
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab"
-                   aria-controls="nav-files" aria-selected="true">Files</a>
+                <a class="nav-item nav-link active" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab"
+                   aria-controls="nav-images" aria-selected="true">Images</a>
+                <a class="nav-item nav-link" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab"
+                   aria-controls="nav-files" aria-selected="false">Files</a>
                 <a class="nav-item nav-link" id="nav-notes-tab" data-toggle="tab" href="#nav-notes" role="tab"
                    aria-controls="nav-notes" aria-selected="false">Notes</a>
                 <a class="nav-item nav-link" id="nav-credentials-tab" data-toggle="tab" href="#nav-credentials"
@@ -33,14 +35,54 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
 
+            <!-- IMAGE -->
+            <div class="tab-pane fade show active" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
+                <br><br>
+                <form action="#" th:action="@{/image/upload}" enctype="multipart/form-data" method="POST">
+                    <div class="container">
+                        <div class="row" style="margin: 1em;">
+                            <div class="col-sm-2">
+                                <label for="imageUpload">Upload New Image</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="file" class="form-control-file" id="imageUpload" name="imageUpload">
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="submit" class="btn btn-outline-secondary">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-bordered table-striped" id="imageTable">
+                    <thead>
+                    <tr>
+                        <th>Image Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="image : ${images}">
+                        <td th:text="${image.imageName}">ExamplePhoto.jpg</td>
+                        <td>
+                            <a target="_blank" class="btn btn-success"
+                               th:href="@{/image/view/{imageId}(imageId=${image.imageId})}">View</a>
+                            <a class="btn btn-danger"
+                               th:href="@{/image/delete/{imageId}(imageId=${image.imageId})}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
             <!-- FILE -->
-            <div class="tab-pane fade show active" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
+            <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
                 <br><br>
                 <form action="#" th:action="@{/file/upload}" enctype="multipart/form-data" method="POST">
                     <div class="container">
                         <div class="row" style="margin: 1em;">
                             <div class="col-sm-2">
-                                <label for="fileUpload">Upload a New File:</label>
+                                <label for="fileUpload">Upload New File</label>
                             </div>
                             <div class="col-sm-6">
                                 <input type="file" class="form-control-file" id="fileUpload" name="fileUpload">

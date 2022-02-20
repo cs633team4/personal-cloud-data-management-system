@@ -11,10 +11,10 @@ import java.util.List;
 @Mapper
 public interface FileMapper {
     @Select("SELECT * FROM FILES WHERE fileid = #{fileId}")
-    File getImage(Integer fileId);
+    File getFile(Integer fileId);
 
     @Select("SELECT * FROM FILES WHERE filename = #{fileName}")
-    File getImageByName(String fileName);
+    File getFileByName(String fileName);
 
     @Select("SELECT * FROM FILES WHERE userid = #{userId}")
     List<File> getAllFilesByUser(Integer userId);

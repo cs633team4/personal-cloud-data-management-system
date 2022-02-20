@@ -1,9 +1,6 @@
 package com.cs633.team4.clouddatamanagementsystem.controller;
 
-import com.cs633.team4.clouddatamanagementsystem.model.Credential;
-import com.cs633.team4.clouddatamanagementsystem.model.File;
-import com.cs633.team4.clouddatamanagementsystem.model.Note;
-import com.cs633.team4.clouddatamanagementsystem.model.User;
+import com.cs633.team4.clouddatamanagementsystem.model.*;
 import com.cs633.team4.clouddatamanagementsystem.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,16 +19,18 @@ import java.util.List;
 public class HomeController {
 
     private final UserService userService;
+    private final ImageService imageService;
     private final FileService fileService;
     private final NoteService noteService;
     private final CredentialService credentialService;
     private final EncryptionService encryptionService;
 
-    public HomeController(UserService userService, FileService fileService,
+    public HomeController(UserService userService, ImageService imageService, FileService fileService,
                           NoteService noteService, CredentialService credentialService,
                           EncryptionService encryptionService) {
 
         this.userService = userService;
+        this.imageService = imageService;
         this.fileService = fileService;
         this.noteService = noteService;
         this.credentialService = credentialService;
@@ -42,11 +42,22 @@ public class HomeController {
 
         final User loggedInUser = userService.getUser(authentication.getName());
 
-        List<File> files = fileService.getAllFiles(loggedInUser);
-        List<Note> notes = noteService.getAllNotes(loggedInUser);
-        List<Credential> credentials = credentialService.getAllCredentials(loggedInUser);
+        List<Image> images = new ArrayList<>();
+        List<File> files = new ArrayList<>();
+        List<Note> notes = new ArrayList<>();
+        List<Credential> credentials = new ArrayList<>();
+
+        try {
+            images = imageService.getAllImages(loggedInUser);
+            files = fileService.getAllFiles(loggedInUser);
+            notes = noteService.getAllNotes(loggedInUser);
+            credentials = credentialService.getAllCredentials(loggedInUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         model.addAttribute("user", loggedInUser);
+        model.addAttribute("images", images);
         model.addAttribute("files", files);
         model.addAttribute("notes", notes);
         model.addAttribute("credentials", credentials);
