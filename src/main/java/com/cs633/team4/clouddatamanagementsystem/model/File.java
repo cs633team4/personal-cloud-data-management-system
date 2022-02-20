@@ -21,19 +21,19 @@ public class File {
         this.userId = userId;
     }
 
-    public Integer getImageId() {
+    public Integer getFileId() {
         return fileId;
     }
 
-    public void setImageId(Integer fileId) {
+    public void setFileId(Integer fileId) {
         this.fileId = fileId;
     }
 
-    public String getImageName() {
+    public String getFileName() {
         return fileName;
     }
 
-    public void setImageName(String fileName) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
@@ -45,19 +45,19 @@ public class File {
         this.contentType = contentType;
     }
 
-    public String getImageSize() {
+    public String getFileSize() {
         return fileSize;
     }
 
-    public void setImageSize(String fileSize) {
+    public void setFileSize(String fileSize) {
         this.fileSize = fileSize;
     }
 
-    public byte[] getImageData() {
+    public byte[] getFileData() {
         return fileData;
     }
 
-    public void setImageData(byte[] fileData) {
+    public void setFileData(byte[] fileData) {
         this.fileData = fileData;
     }
 

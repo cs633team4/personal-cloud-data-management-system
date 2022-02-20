@@ -1,8 +1,10 @@
 package com.cs633.team4.clouddatamanagementsystem.controller;
 
 import com.cs633.team4.clouddatamanagementsystem.model.File;
+import com.cs633.team4.clouddatamanagementsystem.model.Image;
 import com.cs633.team4.clouddatamanagementsystem.model.User;
 import com.cs633.team4.clouddatamanagementsystem.service.FileService;
+import com.cs633.team4.clouddatamanagementsystem.service.ImageService;
 import com.cs633.team4.clouddatamanagementsystem.service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,55 +18,55 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
- * Handle front-end calls, identify home.html template served for file request and populate view model with data.
+ * Handle front-end calls, identify home.html template served for image request and populate view model with data.
  */
 @Controller
-@RequestMapping("/file")
-public class FileController {
+@RequestMapping("/image")
+public class ImageController {
 
     private final UserService userService;
-    private final FileService fileService;
+    private final ImageService imageService;
 
-    public FileController(UserService userService, FileService fileService) {
+    public ImageController(UserService userService, ImageService imageService) {
         this.userService = userService;
-        this.fileService = fileService;
+        this.imageService = imageService;
     }
 
     @PostMapping("/upload")
-    public String uploadFile (@RequestParam("fileUpload") MultipartFile file, Authentication auth, Model model)
+    public String uploadImage (@RequestParam("imageUpload") MultipartFile file, Authentication auth, Model model)
             throws IOException {
 
         try {
             // check if file is selected
             if (file.isEmpty()) {
                 model.addAttribute("error", true);
-                model.addAttribute("message", "No file is selected. Please select a file to upload.");
+                model.addAttribute("message", "No image is selected. Please select a file to upload.");
                 return "result";
             }
 
-            // check if file size is no larger than 1MB
-            if (file.getSize() > 1000000) {
+            // check if file size is no larger than 10MB
+            if (file.getSize() > 10000000) {
                 // throw new MaxUploadSizeExceededException(file.getSize());
                 model.addAttribute("error", true);
-                model.addAttribute("message", "File size is too large. Please don't exceed 1MB.");
+                model.addAttribute("message", "Image size is too large. Please don't exceed 10MB.");
                 return "result";
             }
 
-            // check if file name exits
-            if (!fileService.isFileNameAvailable(file.getOriginalFilename())) {
-                model.addAttribute("error", true);
-                model.addAttribute("message", "File with the same name already exists.");
-                return "result";
-            }
+//            // check if file name exits
+//            if (!imageService.isImageNameAvailable(file.getOriginalFilename())) {
+//                model.addAttribute("error", true);
+//                model.addAttribute("message", "Image with the same name already exists.");
+//                return "result";
+//            }
 
             User user = userService.getUser(auth.getName());
-            File newFile = new File(null, file.getOriginalFilename(), file.getContentType(),
+            Image newFile = new Image(null, file.getOriginalFilename(), file.getContentType(),
                     Long.toString(file.getSize()), file.getBytes(), user.getUserId());
 
             // upload file
-            fileService.addFile(newFile);
+            imageService.addImage(newFile);
             model.addAttribute("success", true);
-            model.addAttribute("message", "Upload file successfully!");
+            model.addAttribute("message", "Upload image successfully!");
 
         } catch (IOException e) {
             model.addAttribute("error", true);
@@ -75,37 +77,37 @@ public class FileController {
     }
 
 
-    @GetMapping("/delete/{fileId}")
-    public String deleteFile(@PathVariable Integer fileId, Model model) {
+    @GetMapping("/delete/{imageId}")
+    public String deleteImage(@PathVariable Integer imageId, Model model) {
         // @PathVariable is used to handle template variables in the request URI mapping, and set them as method parameters.
 
         try {
-            this.fileService.deleteFile(fileId);
+            this.imageService.deleteImage(imageId);
             model.addAttribute("delete", true);
-            model.addAttribute("message", "Delete file successfully!");
+            model.addAttribute("message", "Delete image successfully!");
 
         }catch (Exception e){
             model.addAttribute("error", true);
-            model.addAttribute("message", "Something wrong when deleting File.");
+            model.addAttribute("message", "Something wrong when deleting image.");
         }
 
         return "result";
     }
 
     //
-    @GetMapping("/view/{fileId}")
-    public ResponseEntity viewFile(@PathVariable Integer fileId){
+    @GetMapping("/view/{imageId}")
+    public ResponseEntity viewImage(@PathVariable Integer imageId){
         // ResponseEntity represents the whole HTTP response: status code, headers, and body.
         // Use it to fully configure the HTTP response.
 
-        File file = fileService.getFile(fileId);
+        Image image = imageService.getImage(imageId);
 
         // set custom contentType, header, and body
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(file.getContentType()))
-                // replace "attachment" with "inline" if view file in new browser tab instead of download file directly
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFileName()+"\"")
-                .body(file.getFileData());
+                .contentType(MediaType.parseMediaType(image.getContentType()))
+                // replace "attachment" with "inline" if view image in new browser tab instead of download image directly
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+image.getImageName()+"\"")
+                .body(image.getImageData());
     }
 
 }

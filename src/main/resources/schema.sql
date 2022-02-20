@@ -25,6 +25,16 @@ CREATE TABLE IF NOT EXISTS FILES (
     foreign key (userid) references USERS(userid)
 );
 
+CREATE TABLE IF NOT EXISTS IMAGES (
+     imageid INT PRIMARY KEY auto_increment,
+     imagename VARCHAR,
+     contenttype VARCHAR,
+     imagesize VARCHAR,
+     imagedata BLOB,
+     userid INT,
+     foreign key (userid) references USERS(userid)
+);
+
 CREATE TABLE IF NOT EXISTS CREDENTIALS (
     credentialid INT PRIMARY KEY auto_increment,
     url VARCHAR(100),
